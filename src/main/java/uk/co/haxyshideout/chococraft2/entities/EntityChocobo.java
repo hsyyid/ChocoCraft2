@@ -103,18 +103,18 @@ public class EntityChocobo extends EntityTameable implements IInvBasic
 
 	@Override
 	public void mountEntity(Entity entityIn)
-    {
+	{
 		super.mountEntity(entityIn);
-		
-		if(this.worldObj.isRemote)
+
+		if (this.worldObj.isRemote)
 		{
-			if(Minecraft.getMinecraft().thePlayer.getUniqueID().equals(entityIn.getUniqueID()))
+			if (Minecraft.getMinecraft().thePlayer.getUniqueID().equals(entityIn.getUniqueID()))
 			{
 				Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
 			}
 		}
-    }
-	
+	}
+
 	public void setStats()
 	{
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(this.getAbilityInfo().getMaxHP());// set max health to 30
@@ -211,13 +211,13 @@ public class EntityChocobo extends EntityTameable implements IInvBasic
 	{
 		super.onLivingUpdate();
 
-		if(this.getAbilityInfo().canClimb())
+		if (this.getAbilityInfo().canClimb())
 		{
 			this.stepHeight = 1.0F;
 		}
-		
+
 		this.fallDistance = 0f;
-		
+
 		// Wing rotations, control packet, client side
 		if (worldObj.isRemote)
 		{
@@ -415,11 +415,16 @@ public class EntityChocobo extends EntityTameable implements IInvBasic
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
-		EntityBabyChocobo entity = new EntityBabyChocobo(ageable.worldObj, this.getChocoboColor());
-		this.worldObj.spawnEntityInWorld(entity);
-		entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-		
-		return entity;
+		if (!this.worldObj.isRemote)
+		{
+			EntityBabyChocobo entity = new EntityBabyChocobo(ageable.worldObj, this.getChocoboColor());
+			this.worldObj.spawnEntityInWorld(entity);
+			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+			System.out.println("yaasdAS");
+			return entity;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -522,7 +527,7 @@ public class EntityChocobo extends EntityTameable implements IInvBasic
 			}
 			return true;
 		}
-		else if(player.getHeldItem().getItem() == Additions.gysahlGoldenItem)
+		else if (player.getHeldItem().getItem() == Additions.gysahlGoldenItem)
 		{
 			this.createChild(this);
 		}
