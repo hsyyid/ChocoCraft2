@@ -12,6 +12,7 @@ import uk.co.haxyshideout.chococraft2.config.Constants;
 import uk.co.haxyshideout.chococraft2.entities.EntityBabyChocobo;
 import uk.co.haxyshideout.chococraft2.entities.EntityChocobo;
 import uk.co.haxyshideout.chococraft2.entities.RiderState;
+import uk.co.haxyshideout.chococraft2.entities.models.ModelBabyChocobo;
 import uk.co.haxyshideout.chococraft2.entities.models.ModelChocobo;
 import uk.co.haxyshideout.chococraft2.entities.renderer.BabyChocoboRenderer;
 import uk.co.haxyshideout.chococraft2.entities.renderer.ChocoboRenderer;
@@ -40,7 +41,7 @@ public class ClientProxy extends ServerProxy
 		// Have to register renderers in here because mojang is stupid
 		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
 		RenderingRegistry.registerEntityRenderingHandler(EntityChocobo.class, new ChocoboRenderer(manager, new ModelChocobo()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBabyChocobo.class, new BabyChocoboRenderer(manager, new ModelChocobo()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBabyChocobo.class, new BabyChocoboRenderer(manager, new ModelBabyChocobo()));
 	}
 
 	@Override

@@ -417,10 +417,10 @@ public class EntityChocobo extends EntityTameable implements IInvBasic
 	{
 		if (!this.worldObj.isRemote)
 		{
-			EntityBabyChocobo entity = new EntityBabyChocobo(ageable.worldObj, this.getChocoboColor());
-			this.worldObj.spawnEntityInWorld(entity);
+			EntityBabyChocobo entity = new EntityBabyChocobo(ageable.worldObj);
+			entity.setColor(this.getChocoboColor());
 			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-			System.out.println("yaasdAS");
+			this.worldObj.spawnEntityInWorld(entity);
 			return entity;
 		}
 
